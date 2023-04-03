@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <p>Thời gian bấm giờ: <span id="timer">00:00:00</span></p>
+    <button id="start" onclick="startTimer()">Bắt đầu</button>
+    <button id="stop" onclick="stopTimer()">Dừng</button>
+    <button id="reset" onclick="resetTimer()">Đặt lại</button>
+    <script>
+        var timer;
+
+        function startTimer() {
+            var startTime = Date.now();
+            timer = setInterval(function () {
+                var timeNow = Date.now() - startTime;
+                var hours = Math.floor(timeNow / (60 * 60 * 1000));
+                var minutes = Math.floor((timeNow / (60 * 1000)) % 60);
+                var seconds = Math.floor((timeNow / 1000) % 60);
+                var timerElement = document.getElementById("timer");
+                timerElement.innerHTML = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
+            }, 1000); // cập nhật thời gian sau mỗi giây
+        }
+
+        function stopTimer() {
+            clearInterval(timer);
+        }
+        
+        function resetTimer() {
+            var hours = 0, minutes = 0, seconds = 0;
+            var timerElement = document.getElementById("timer");
+            timerElement.innerHTML = hours.toString().padStart(2, "0") + ":" + minutes.toString().padStart(2, "0") + ":" + seconds.toString().padStart(2, "0");
+            clearInterval(timer);
+        }
+    </script>
+</body>
+
+</html>
